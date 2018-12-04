@@ -27,115 +27,58 @@ function resetApiResults(arr) {
 }
 
 function ajaxCall() {
-  whichChecks();
-  updateEpochTimes();
+  //whichChecks();
+  //updateEpochTimes();
+  // see if there is an existing histogram
   if (times.length > 0) {
+    // clear travel times to be populated with new data
     times = [];
-    for (var i=0; i < timesToQuery.length; i++) {
+    // loop through each day time segement in the list to get the travel times
+    for (var i = 0; i < timesToQuery.length; i++) {
       $.ajax({
         type: "GET",
+        // async keeps the histogram from executing before the query loop is done
         async: false,
         url: url + key + format + fromStop + toStop + timesToQuery[i][0] + timesToQuery[i][1],
-        success:
-          function(data) {
-            if (data.travel_times.length > 0) {
-                json = data;
-                benchmark = json.travel_times[0].benchmark_travel_time_sec;
-                for (var j = 0; j < data.travel_times.length; j++) {
-                  var time = parseFloat(data.travel_times[j].travel_time_sec);
-                  times.push((time / 60));
-                }
-              }
+        success: function(data) {
+          if (data.travel_times.length > 0) {
+            json = data;
+            benchmark = json.travel_times[0].benchmark_travel_time_sec;
+            // parse each time and change it from seconds to minutes
+            for (var j = 0; j < data.travel_times.length; j++) {
+              var time = parseFloat(data.travel_times[j].travel_time_sec);
+              times.push((time / 60));
             }
-          });
+          }
         }
-        refresh(times);
-        refresh(times);
-        $("#api-test").append(benchmark + ", ");
+      });
+    }
+    refresh(times);
+    refresh(times);
+    $("#api-test").append(benchmark + ", ");
   } else {
     times = [];
-    for (var i=0; i < timesToQuery.length; i++) {
+    for (var i = 0; i < timesToQuery.length; i++) {
       $.ajax({
         type: "GET",
         async: false,
         url: url + key + format + fromStop + toStop + timesToQuery[i][0] + timesToQuery[i][1],
-        success:
-          function(data) {
-            if (data.travel_times.length > 0) {
-                json = data;
-                benchmark = json.travel_times[0].benchmark_travel_time_sec;
-                for (var j = 0; j < data.travel_times.length; j++) {
-                  var time = parseFloat(data.travel_times[j].travel_time_sec);
-                  times.push((time / 60));
-                }
-                $("#api-test").append(benchmark + ", ");
-              }
-            }
-          });
-        }
-        makeHistogram(times, color);
-        $("#api-test").append(benchmark + ", ");
-
-  }
-  //getStartEndTimes();
-  // call jquery ajax function
-  /*
-  $.ajax({
-    // specify type of ajax call, in this case "GET"
-    type: "GET",
-    // specify the URL
-    url: url + key + format + fromStop + toStop + fromTime + toTime,
-    // function that defines what to do in the case of a successful 'get'
-    success:
-      // funciton takes in the data retrieved from the query
-      function(data) {
-        // checks to make sure the query returned some times
-        if (data.travel_times.length > 0) {
-          // checkes to see if a query has already been made
-          if (times.length > 0) {
-            // ABSTRACT THIS FROM HERE
-            // updates json
+        success: function(data) {
+          if (data.travel_times.length > 0) {
             json = data;
-            // clears out times variable to populate historgram
-            times = [];
-            // defines benchmark
             benchmark = json.travel_times[0].benchmark_travel_time_sec;
-            // loop
-            for (var i = 0; i < data.travel_times.length; i++) {
-              // turn time into integer
-              var time = parseFloat(data.travel_times[i].travel_time_sec);
-              // make time be in minutes and add time to times variable
+            for (var j = 0; j < data.travel_times.length; j++) {
+              var time = parseFloat(data.travel_times[j].travel_time_sec);
               times.push((time / 60));
             }
-            // TO HERE
-            // updates the histogram
-            makeHistogramTitle();
-            refresh(times);
-            refresh(times);
-            $("#api-test").append(benchmark + ", ");
-          } else {
-            // ABSTRACT THIS
-            json = data;
-            times = [];
-            benchmark = json.travel_times[0].benchmark_travel_time_sec;
-            for (var i = 0; i < data.travel_times.length; i++) {
-              var time = parseFloat(data.travel_times[i].travel_time_sec);
-              times.push((time / 60));
-            }
-            // TO HERE
-            // makes the first histogram
-            makeHistogramTitle();
-            makeHistogram(times, color);
-
             $("#api-test").append(benchmark + ", ");
           }
-        } else {
-          // alert that the query was successful but no data was returned
-          alert("This query returned no data! Please try a different one.");
         }
-      }
-  });
-  */
+      });
+    }
+    makeHistogram(times, color);
+    $("#api-test").append(benchmark + ", ");
+  }
 }
 
 
@@ -370,6 +313,7 @@ function populateMonths(months) {
   while (node.firstChild) {
     node.removeChild(node.firstChild);
   }
+  $("#startTimeMonth").text("Month:");
   monthNames = Object.keys(months);
   currentMonthsObject = months;
   var data = monthNames;
@@ -386,8 +330,6 @@ function populateMonths(months) {
 function addMonthDays(month) {
   $("#startTimeMonth").text(month.split('_').join(' '));
   fromMonth = monthNames.findIndex((m) => (m == month));
-
-
   if (fromYear == 2016) {
     populateDates(currentMonthsObject[month]);
   } else {
@@ -402,6 +344,8 @@ function populateDates(numberOfDays) {
   while (node.firstChild) {
     node.removeChild(node.firstChild);
   }
+  $("#startTimeDay").text("Day:");
+  $("#dayType").text("Day Type:");
   var data = [];
   for (var i = 0; i < numberOfDays; i++) {
     data.push(i + 1);
@@ -422,21 +366,180 @@ function chooseDay(n) {
 
 }
 
-function updateEpochTimes() {
+function addDayType(daytype) {
+  switch (daytype) {
+    case "week":
+      dayType = "week";
+      $("#dayType").text("Weekday");
+      $("#daySeg").text("Segement:");
+      var node = document.getElementById("selectDaySeg");
+      while (node.firstChild) {
+        node.removeChild(node.firstChild);
+      }
+      var data = ["AM_Peak", "PM_Peak", "Off_Peak"];
+      var daySegButton = d3.select("#selectDaySeg");
+      var a = daySegButton.selectAll("a").data(data);
+      a.remove();
+      a.enter()
+        .append("a")
+        .attr("href", "#")
+        .attr("onclick", (d) => ("addDaySegs('" + d + "')"))
+        .text((d) => (d.split('_').join(' ')));
+      break;
+    case "sat":
+      dayType = 6;
+      $("#dayType").text("Saturday");
+      $("#daySeg").text("All Day");
+      addDaySegs("All_Day");
+      var node = document.getElementById("selectDaySeg");
+      while (node.firstChild) {
+        node.removeChild(node.firstChild);
+      }
+      break;
+    case "sun":
+      dayType = 0;
+      $("#dayType").text("Sunday");
+      $("#daySeg").text("All Day");
+      addDaySegs("All_Day");
+      var node = document.getElementById("selectDaySeg");
+      while (node.firstChild) {
+        node.removeChild(node.firstChild);
+      }
+      break;
+    default:
+  }
+}
+
+
+function addDaySegs(segement) {
   timesToQuery = [];
+  switch (segement) {
+    case "All_Day":
+      for (var i = 0; i < 21; i++) {
+        var day = parseFloat(fromDay);
+        day += i;
+        fromTime = "&from_datetime=";
+        toTime = "&to_datetime=";
+        var fromD = new Date(fromYear, fromMonth, day, 5);
+        fromEpoch = fromD.getTime() / 1000;
+        var toD = new Date(fromYear, fromMonth, (day+1), 2, 59);
+        toEpoch = toD.getTime() / 1000;
+        fromTime += fromEpoch;
+        toTime += toEpoch;
+        if (fromD.getDay() == dayType) {
+          timesToQuery.push([fromTime, toTime]);
+        }
+      }
+      break;
+    case "AM_Peak":
+      $("#daySeg").text("AM Peak");
+      for (var i = 0; i < 7; i++) {
+        var day = parseFloat(fromDay);
+        day += i;
+        fromTime = "&from_datetime=";
+        toTime = "&to_datetime=";
+        var fromD = new Date(fromYear, fromMonth, day, 7);
+        fromEpoch = fromD.getTime() / 1000;
+        var toD = new Date(fromYear, fromMonth, day, 8, 59);
+        toEpoch = toD.getTime() / 1000;
+        fromTime += fromEpoch;
+        toTime += toEpoch;
+        if (fromD.getDay() != 0 && fromD.getDay() != 6) {
+          timesToQuery.push([fromTime, toTime]);
+        }
+      }
+      break;
+    case "PM_Peak":
+      $("#daySeg").text("PM Peak");
+      for (var i = 0; i < 7; i++) {
+        var day = parseFloat(fromDay);
+        day += i;
+        fromTime = "&from_datetime=";
+        toTime = "&to_datetime=";
+        var fromD = new Date(fromYear, fromMonth, day, 16);
+        fromEpoch = fromD.getTime() / 1000;
+        var toD = new Date(fromYear, fromMonth, day, 18, 29);
+        toEpoch = toD.getTime() / 1000;
+        fromTime += fromEpoch;
+        toTime += toEpoch;
+        if (fromD.getDay() != 0 && fromD.getDay() != 6) {
+          timesToQuery.push([fromTime, toTime]);
+        }
+      }
+      break;
+    case "Off_Peak":
+      $("#daySeg").text("Off Peak");
+      for (var i = 0; i < 7; i++) {
+        var day = parseFloat(fromDay);
+        day += i;
+        fromTime = "&from_datetime=";
+        toTime = "&to_datetime=";
+        var fromD = new Date(fromYear, fromMonth, day, 18, 30);
+        fromEpoch = fromD.getTime() / 1000;
+        var toD = new Date(fromYear, fromMonth, (day+1), 6, 59);
+        toEpoch = toD.getTime() / 1000;
+        fromTime += fromEpoch;
+        toTime += toEpoch;
+        if (fromD.getDay() != 0 && fromD.getDay() != 6 &&
+          toD.getDay() != 0 && toD.getDay() != 6) {
+          timesToQuery.push([fromTime, toTime]);
+        }
+      }
+      for (var i = 0; i < 7; i++) {
+        var day = parseFloat(fromDay);
+        day += i;
+        fromTime = "&from_datetime=";
+        toTime = "&to_datetime=";
+        var fromD = new Date(fromYear, fromMonth, day, 9);
+        fromEpoch = fromD.getTime() / 1000;
+        var toD = new Date(fromYear, fromMonth, day, 15, 59);
+        toEpoch = toD.getTime() / 1000;
+        fromTime += fromEpoch;
+        toTime += toEpoch;
+        if (fromD.getDay() != 0 && fromD.getDay() != 6 &&
+          toD.getDay() != 0 && toD.getDay() != 6) {
+          timesToQuery.push([fromTime, toTime]);
+        }
+      }
+      break;
+    default:
+
+  }
+}
+/*
+UPDATE EPOCH TIMES
+DOM State -> Array of time string pairs used to query api to get travel times
+all segements are checked -> Array length 1, entire week (7 days) is queried
+both peak segements are checked -> Array length 10, am & pm for all week days
+am peak -> Array length 5, am peak for all week days
+pm peak -> Array length 5, pm peak for all week days
+off peak -> Array length 10, all times between am and pm peaks
+*/
+function updateEpochTimes() {
+  // create empty array that will be populated with time string pairs
+  timesToQuery = [];
+  // if all times are checked
+  // all times from start of day (5:00am) to 7 days later are returned\
+  // possibly this should be changed and broken out by day type
   if (allTimesChecked) {
+    // initialize fromTime and toTime
     fromTime = "&from_datetime=";
     toTime = "&to_datetime=";
+    // fromD is the Date of the first day at 5 am
     var fromD = new Date(fromYear, fromMonth, fromDay, 5);
+    // convert to epoch time
     fromEpoch = fromD.getTime() / 1000;
     var delta = 7;
     // number of seconds in 24 hours
     delta *= 86400;
+    // calculate epoch time of 7 days later
     toEpoch = fromEpoch + delta;
     fromTime += fromEpoch;
     toTime += toEpoch;
+    // add these times to the times to query variable
     timesToQuery.push([fromTime, toTime]);
   } else if (bothPeakChecked) {
+    // loop through all 7 days of the week
     for (var i = 0; i < 7; i++) {
       var day = parseFloat(fromDay);
       day += i;
@@ -512,7 +615,7 @@ function updateEpochTimes() {
       fromTime += fromEpoch;
       toTime += toEpoch;
       if (fromD.getDay() != 0 && fromD.getDay() != 6 &&
-      toD.getDay() != 0 && toD.getDay() != 6) {
+        toD.getDay() != 0 && toD.getDay() != 6) {
         timesToQuery.push([fromTime, toTime]);
       }
     }
@@ -528,12 +631,12 @@ function updateEpochTimes() {
       fromTime += fromEpoch;
       toTime += toEpoch;
       if (fromD.getDay() != 0 && fromD.getDay() != 6 &&
-      toD.getDay() != 0 && toD.getDay() != 6) {
+        toD.getDay() != 0 && toD.getDay() != 6) {
         timesToQuery.push([fromTime, toTime]);
       }
     }
   } else {
-    alert("Please select a time period");
+    alert("Please select a time segement");
   }
 
 }
@@ -558,19 +661,3 @@ function makeHistogramTitle() {
   fromDateString = fromDate.toDateString();
   toDateString = toDate.toDateString();
 }
-
-function whichChecks() {
-  amPeakIsChecked = document.getElementById("amPeak").checked;
-  pmPeakIsChecked = document.getElementById("pmPeak").checked;
-  offPeakIsChecked = document.getElementById("offPeak").checked;
-  if (amPeakIsChecked && pmPeakIsChecked && offPeakIsChecked) {
-    allTimesChecked = true;
-  } else {
-    allTimesChecked = false;
-  }
-  if (amPeakIsChecked && pmPeakIsChecked) {
-    bothPeakChecked = true;
-  } else {
-    bothPeakChecked = false;
-  }
-};

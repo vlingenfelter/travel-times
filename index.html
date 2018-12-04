@@ -1,17 +1,18 @@
 <!DOCTYPE html>
+<html lang = "en">
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" href="style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Comfortaa|Emblema+One|Libre+Franklin" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-
 </head>
 <body>
-<div class="title">
+<header class="title">
   <h1> Travel Times by Week </h1>
-</div>
+</header>
 
+<main>
 <div class="button-bar">
 <div class="dropdown">
   <button class="dropbtn" id="directionButton">Direction: </button>
@@ -63,12 +64,19 @@
   <div class="dropdown-content" id="selectStartDay">
   </div>
 </div>
-      <input type="checkbox" id="amPeak" />
-      <label for="amPeak">A.M. Peak</label>
-      <input type="checkbox" id='pmPeak' />
-      <label for="pmPeak">P.M. Peak</label>
-      <input type="checkbox" id='offPeak' />
-      <label for="offPeak">Off Peak</label>
+<div class="dropdown">
+  <button class="dropbtn" id="dayType">Day Type: </button>
+  <div class="dropdown-content" id="selectDayType">
+    <a href="#" onclick="addDayType('week')">Weekday</a>
+    <a href="#" onclick="addDayType('sat')">Saturday</a>
+    <a href="#" onclick="addDayType('sun')">Sunday</a>
+  </div>
+</div>
+<div class="dropdown">
+  <button class="dropbtn" id="daySeg">Segement: </button>
+  <div class="dropdown-content" id="selectDaySeg">
+  </div>
+</div>
 <button class="dropbtn" onclick="ajaxCall()">See Times</button>
 
 </div>
@@ -81,13 +89,16 @@
   </p>
 </div>
 
-<div class="bottom-bar">
+</main>
+
+<footer class="bottom-bar">
   <h4> Made with <i class = "fas fa-heart" style="color:#ffbaad"></i> by OPMI </h4>
   <p style="color:white">Processed with <i class="fas fa-coffee"></i> by interns </p>
-</div>
+</footer>
 
 </body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="document-ready.js"></script>
 <script src="query-api.js"></script>
 <script src="viz.js"></script>
+</html>

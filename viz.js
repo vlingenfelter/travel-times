@@ -3,31 +3,38 @@ function makeHistogram(values, color) {
   // A formatter for counts.
   formatCount = d3.format(",.0f");
 
+  // find the width of the histogram and the legend according to the size of viewport
   histogramWidth = document.getElementById("histogram").getBoundingClientRect().width;
   legendWidth = document.getElementById("legend").getBoundingClientRect().width;
   histogramHeight = document.getElementById("histogram").getBoundingClientRect().height;
   legendHeight = document.getElementById("legend").getBoundingClientRect().height;
 
+  // create margin object
   margin = {
       top: 30,
       right: 30,
       bottom: 30,
       left: 30
     },
+    // this tells us the width for use when creating the histogram bars
     width = histogramWidth - margin.left - margin.right;
-  height = 500 - margin.top - margin.bottom;
+    height = 500 - margin.top - margin.bottom;
 
 
 
   //legendWidth = svgWidth * .3;
 
-
+  // Calculate stats
   max = d3.max(values);
   min = d3.min(values);
   med = d3.median(values);
   mean = d3.mean(values);
+  // this is how many times were recorded
   numberOfTimes = values.length;
+  // sort the times to find the percentiles
   sortedTimes = values.sort((a,b) => (a - b));
+  // get 15th, 20th, and 25th percentile for use in deciding
+  // new benchmark travel times
   var per15coeff =  Math.floor(numberOfTimes*.15) - 1;
   var per20coeff =  Math.floor(numberOfTimes*.2) - 1;
   var per25coeff =  Math.floor(numberOfTimes*.25) - 1;
