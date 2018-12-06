@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang = "en">
 <head>
-<meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Comfortaa|Emblema+One|Libre+Franklin" rel="stylesheet">
@@ -13,73 +14,83 @@
 </header>
 
 <main>
-<div class="button-bar">
-<div class="dropdown">
-  <button class="dropbtn" id="directionButton">Direction: </button>
-  <div class="dropdown-content" id="selectDirection">
-    <a href="#" onclick="addStartStops('alewifetoashmont')">Red (Ashmont): Alewife to Ashmont</a>
-    <a href="#" onclick="addStartStops('ashmonttoalewife')">Red (Ashmont): Ashmont to Alewife</a>
-    <a href="#" onclick="addStartStops('alewifetobraintree')">Red (Braintree): Alewife to Braintree</a>
-    <a href="#" onclick="addStartStops('braintreetoalewife')">Red (Braintree): Braintree to Alewife </a>
-    <a href="#" onclick="addStartStops('oakgrovetoforesthills')">Orange: Oak Grove to Forest Hills</a>
-    <a href="#" onclick="addStartStops('foresthillstooakgrove')">Orange: Forest Hills to Oak Grove</a>
-    <a href="#" onclick="addStartStops('bowdointowonderland')">Blue: Bowdoin to Wonderland</a>
-    <a href="#" onclick="addStartStops('wonderlandtobowdoin')">Blue: Wonderland to Bowdoin</a>
-    <a href="#" onclick="addStartStops('bostoncollegetoparkst')">Green B: Boston College to Park St</a>
-    <a href="#" onclick="addStartStops('parksttobostoncollege')">Green B: Park St to Boston College</a>
-    <a href="#" onclick="addStartStops('clevelandcircletonorthstation')">Green C: Cleveland Circle to North Station</a>
-    <a href="#" onclick="addStartStops('northstationtoclevelandcircle')">Green C: North Station to Cleveland Circle</a>
-    <a href="#" onclick="addStartStops('riversidetogovernmentcenter')">Green D: Riverside to Government Center</a>
-    <a href="#" onclick="addStartStops('governmentcentertoriverside')">Green D: Government Center to Riverside</a>
-    <a href="#" onclick="addStartStops('heathsttolechemere')">Green E: Heath St to Lechemere</a>
-    <a href="#" onclick="addStartStops('lechemeretoheathst')">Green E: Lechemere to Heath St</a>
-  </div>
-</div>
-<div class="dropdown">
-  <button class="dropbtn" id="fromButton">From Station: </button>
-  <div class="dropdown-content" id="selectStart">
-  </div>
-</div>
-<div class="dropdown">
-  <button class="dropbtn" id="endButton">To Station: </button>
-  <div class="dropdown-content" id="selectEnd">
-  </div>
-</div>
-<div class="dropdown">
-  <button class="dropbtn" id="startTimeYear">Year: </button>
-  <div class="dropdown-content" id="selectStartYear">
-    <a href="#" onclick="addFromYear('2015')">2015</a>
-    <a href="#" onclick="addFromYear('2016')">2016</a>
-    <a href="#" onclick="addFromYear('2017')">2017</a>
-    <a href="#" onclick="addFromYear('2018')">2018</a>
-  </div>
-</div>
-<div class="dropdown">
-  <button class="dropbtn" id="startTimeMonth">Month: </button>
-  <div class="dropdown-content" id="selectStartMonth">
-  </div>
-</div>
-<div class="dropdown">
-  <button class="dropbtn" id="startTimeDay">Day: </button>
-  <div class="dropdown-content" id="selectStartDay">
-  </div>
-</div>
-<div class="dropdown">
-  <button class="dropbtn" id="dayType">Day Type: </button>
-  <div class="dropdown-content" id="selectDayType">
-    <a href="#" onclick="addDayType('week')">Weekday</a>
-    <a href="#" onclick="addDayType('sat')">Saturday</a>
-    <a href="#" onclick="addDayType('sun')">Sunday</a>
-  </div>
-</div>
-<div class="dropdown">
-  <button class="dropbtn" id="daySeg">Segement: </button>
-  <div class="dropdown-content" id="selectDaySeg">
-  </div>
-</div>
-<button class="dropbtn" onclick="ajaxCall()">See Times</button>
 
+<div class="button-bar">
+  <div class="dropdown">
+    <button class="dropbtn color-change" id="directionButton" aria-haspopup="true" aria-expanded="false">Direction: </button>
+    <div class="dropdown-content" id="selectDirection" aria-labelledby="directionButton">
+      <a href="#" onclick="addStartStops('alewifetoashmont')">Red (Ashmont): Alewife to Ashmont</a>
+      <a href="#" onclick="addStartStops('ashmonttoalewife')">Red (Ashmont): Ashmont to Alewife</a>
+      <a href="#" onclick="addStartStops('alewifetobraintree')">Red (Braintree): Alewife to Braintree</a>
+      <a href="#" onclick="addStartStops('braintreetoalewife')">Red (Braintree): Braintree to Alewife </a>
+      <a href="#" onclick="addStartStops('oakgrovetoforesthills')">Orange: Oak Grove to Forest Hills</a>
+      <a href="#" onclick="addStartStops('foresthillstooakgrove')">Orange: Forest Hills to Oak Grove</a>
+      <a href="#" onclick="addStartStops('bowdointowonderland')">Blue: Bowdoin to Wonderland</a>
+      <a href="#" onclick="addStartStops('wonderlandtobowdoin')">Blue: Wonderland to Bowdoin</a>
+      <a href="#" onclick="addStartStops('bostoncollegetoparkst')">Green B: Boston College to Park St</a>
+      <a href="#" onclick="addStartStops('parksttobostoncollege')">Green B: Park St to Boston College</a>
+      <a href="#" onclick="addStartStops('clevelandcircletonorthstation')">Green C: Cleveland Circle to North Station</a>
+      <a href="#" onclick="addStartStops('northstationtoclevelandcircle')">Green C: North Station to Cleveland Circle</a>
+      <a href="#" onclick="addStartStops('riversidetogovernmentcenter')">Green D: Riverside to Government Center</a>
+      <a href="#" onclick="addStartStops('governmentcentertoriverside')">Green D: Government Center to Riverside</a>
+      <a href="#" onclick="addStartStops('heathsttolechemere')">Green E: Heath St to Lechemere</a>
+      <a href="#" onclick="addStartStops('lechemeretoheathst')">Green E: Lechemere to Heath St</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn color-change" id="fromButton" aria-haspopup="true" aria-expanded="false">From Station: </button>
+    <div class="dropdown-content" id="selectStart" aria-labelledby="fromButton">
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn color-change" id="endButton" aria-haspopup="true" aria-expanded="false">To Station: </button>
+    <div class="dropdown-content" id="selectEnd" aria-labelledby="endButton">
+    </div>
+  </div>
 </div>
+
+<div>
+  <div class="dropdown">
+    <button class="dropbtn color-change" id="startTimeYear" aria-haspopup="true" aria-expanded="false">Year: </button>
+    <div class="dropdown-content" id="selectStartYear" aria-labelledby="startTimeYear">
+      <a href="#" onclick="addFromYear('2015')">2015</a>
+      <a href="#" onclick="addFromYear('2016')">2016</a>
+      <a href="#" onclick="addFromYear('2017')">2017</a>
+      <a href="#" onclick="addFromYear('2018')">2018</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn color-change" id="startTimeMonth" aria-haspopup="true" aria-expanded="false">Month: </button>
+    <div class="dropdown-content" id="selectStartMonth" aria-labelledby="startTimeMonth">
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn color-change" id="startTimeDay" aria-haspopup="true" aria-expanded="false">Day: </button>
+    <div class="dropdown-content" id="selectStartDay" aria-labelledby="startTimeDay">
+    </div>
+  </div>
+</div>
+
+
+<div class="button-bar">
+  <div class="dropdown">
+    <button class="dropbtn color-change" id="dayType" aria-haspopup="true" aria-expanded="false">Day Type: </button>
+    <div class="dropdown-content" id="selectDayType" aria-labelledby="dayType">
+      <a href="#" onclick="addDayType('week')">Weekday</a>
+      <a href="#" onclick="addDayType('sat')">Saturday</a>
+      <a href="#" onclick="addDayType('sun')">Sunday</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn color-change" id="daySeg" aria-haspopup="true" aria-expanded="false">Segement: </button>
+    <div class="dropdown-content" id="selectDaySeg" aria-labelledby="daySeg">
+    </div>
+  </div>
+</div>
+
+<button class="dropbtn submit" onclick="ajaxCall()">See Times</button>
+
+
 <div id="svgContainer">
   <div id="histogram"></div>
   <div id="legend"></div>
@@ -88,7 +99,6 @@
   <p id="api-test">
   </p>
 </div>
-
 </main>
 
 <footer class="bottom-bar">
@@ -98,7 +108,7 @@
 
 </body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="document-ready.js"></script>
+<script src="stops.js"></script>
 <script src="query-api.js"></script>
 <script src="viz.js"></script>
 </html>

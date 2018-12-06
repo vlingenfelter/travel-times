@@ -342,7 +342,7 @@ function refresh(values) {
 }
 
 function buttonColorTransition() {
-  d3.selectAll("button").transition()
+  d3.selectAll(".color-change").transition()
     .duration(500)
     .style("background-color", color);
 }

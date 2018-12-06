@@ -1,8 +1,3 @@
-// document ready function
-$(document).ready(function() {
-
-});
-
 var orangeLineStopOrder = {
   "Oak_Grove_to_Forest_Hills": {
     "Malden_Center": 70034,
