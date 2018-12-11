@@ -55,7 +55,8 @@ function ajaxCall() {
     }
     refresh(times);
     refresh(times);
-    $("#api-test").append(benchmark + ", ");
+    refreshDataTable();
+    // $("#api-test").append(benchmark + ", ");
   } else {
     times = [];
     for (var i = 0; i < timesToQuery.length; i++) {
@@ -71,13 +72,14 @@ function ajaxCall() {
               var time = parseFloat(data.travel_times[j].travel_time_sec);
               times.push((time / 60));
             }
-            $("#api-test").append(benchmark + ", ");
+          //  $("#api-test").append(benchmark + ", ");
           }
         }
       });
     }
     makeHistogram(times, color);
-    $("#api-test").append(benchmark + ", ");
+    // $("#api-test").append(numberOfTimes + " results found");
+    getDataTable();
   }
 }
 

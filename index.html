@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang = "en">
 <head>
+  <title>Travel Time Histograms</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon"
+      type="image/png"
+      href="graphics/heart.png">
 <link rel="stylesheet" href="style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Comfortaa|Emblema+One|Libre+Franklin" rel="stylesheet">
@@ -14,7 +18,6 @@
 </header>
 
 <main>
-
 <div class="button-bar">
   <div class="dropdown">
     <button class="dropbtn color-change" id="directionButton" aria-haspopup="true" aria-expanded="false">Direction: </button>
@@ -95,9 +98,10 @@
   <div id="histogram"></div>
   <div id="legend"></div>
 </div>
-<div>
-  <p id="api-test">
-  </p>
+<div id="dataTableContainer">
+  <button class="dropbtn" id="dataTableButton" onclick="displayDataTable()">
+    View data table
+  </button>
 </div>
 </main>
 
