@@ -13,12 +13,12 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
 <body>
-<header class="title">
+<header class="title col-12">
   <h1> Travel Times by Week </h1>
 </header>
 
 <main>
-<div class="button-bar">
+<div class="button-bar col-3">
   <div class="dropdown">
     <button class="dropbtn color-change" id="directionButton" aria-haspopup="true" aria-expanded="false">Direction: </button>
     <div class="dropdown-content" id="selectDirection" aria-labelledby="directionButton">
@@ -52,7 +52,7 @@
   </div>
 </div>
 
-<div>
+<div class="col-3">
   <div class="dropdown">
     <button class="dropbtn color-change" id="startTimeYear" aria-haspopup="true" aria-expanded="false">Year: </button>
     <div class="dropdown-content" id="selectStartYear" aria-labelledby="startTimeYear">
@@ -75,7 +75,7 @@
 </div>
 
 
-<div class="button-bar">
+<div class="button-bar col-3">
   <div class="dropdown">
     <button class="dropbtn color-change" id="dayType" aria-haspopup="true" aria-expanded="false">Day Type: </button>
     <div class="dropdown-content" id="selectDayType" aria-labelledby="dayType">
@@ -95,8 +95,8 @@
 
 
 <div id="svgContainer">
-  <div id="histogram"></div>
-  <div id="legend"></div>
+  <div id="histogram" class="col-8"></div>
+  <div id="legend" class="col-4"></div>
 </div>
 <div id="dataTableContainer">
   <button class="dropbtn" id="dataTableButton" onclick="displayDataTable()">

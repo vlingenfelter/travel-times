@@ -17,10 +17,11 @@ function makeHistogram(values, color) {
       left: 30
     },
     // this tells us the width for use when creating the histogram bars
+    width = parseInt(d3.select('#histogram').style('width'), 10);
     width = histogramWidth - margin.left - margin.right;
-    height = 500 - margin.top - margin.bottom;
+    height = width * 0.7 - margin.top - margin.bottom;
 
-
+    legendWidth = parseInt(d3.select('#legend').style('width'), 10);
 
   //legendWidth = svgWidth * .3;
 
@@ -73,6 +74,7 @@ function makeHistogram(values, color) {
     .tickFormat((d) => (d + " min"));
 
   svg = d3.select("#histogram").append("svg")
+    .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
