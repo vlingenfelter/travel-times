@@ -1,118 +1,129 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
+
 <head>
   <title>Travel Time Histograms</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon"
-      type="image/png"
-      href="graphics/heart.png">
-<link rel="stylesheet" href="style.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Comfortaa|Emblema+One|Libre+Franklin" rel="stylesheet">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="icon" type="image/png" href="graphics/heart.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
+
 <body>
-<header class="title col-12">
-  <h1> Travel Times by Week </h1>
-</header>
+  <header class="title col-12">
+    <h1> Travel Times by Week </h1>
+  </header>
 
-<main>
-<div class="button-bar col-3">
-  <div class="dropdown">
-    <button class="dropbtn color-change" id="directionButton" aria-haspopup="true" aria-expanded="false">Direction: </button>
-    <div class="dropdown-content" id="selectDirection" aria-labelledby="directionButton">
-      <a href="#" onclick="addStartStops('alewifetoashmont')">Red (Ashmont): Alewife to Ashmont</a>
-      <a href="#" onclick="addStartStops('ashmonttoalewife')">Red (Ashmont): Ashmont to Alewife</a>
-      <a href="#" onclick="addStartStops('alewifetobraintree')">Red (Braintree): Alewife to Braintree</a>
-      <a href="#" onclick="addStartStops('braintreetoalewife')">Red (Braintree): Braintree to Alewife </a>
-      <a href="#" onclick="addStartStops('oakgrovetoforesthills')">Orange: Oak Grove to Forest Hills</a>
-      <a href="#" onclick="addStartStops('foresthillstooakgrove')">Orange: Forest Hills to Oak Grove</a>
-      <a href="#" onclick="addStartStops('bowdointowonderland')">Blue: Bowdoin to Wonderland</a>
-      <a href="#" onclick="addStartStops('wonderlandtobowdoin')">Blue: Wonderland to Bowdoin</a>
-      <a href="#" onclick="addStartStops('bostoncollegetoparkst')">Green B: Boston College to Park St</a>
-      <a href="#" onclick="addStartStops('parksttobostoncollege')">Green B: Park St to Boston College</a>
-      <a href="#" onclick="addStartStops('clevelandcircletonorthstation')">Green C: Cleveland Circle to North Station</a>
-      <a href="#" onclick="addStartStops('northstationtoclevelandcircle')">Green C: North Station to Cleveland Circle</a>
-      <a href="#" onclick="addStartStops('riversidetogovernmentcenter')">Green D: Riverside to Government Center</a>
-      <a href="#" onclick="addStartStops('governmentcentertoriverside')">Green D: Government Center to Riverside</a>
-      <a href="#" onclick="addStartStops('heathsttolechemere')">Green E: Heath St to Lechemere</a>
-      <a href="#" onclick="addStartStops('lechemeretoheathst')">Green E: Lechemere to Heath St</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <button class="dropbtn color-change" id="fromButton" aria-haspopup="true" aria-expanded="false">From Station: </button>
-    <div class="dropdown-content" id="selectStart" aria-labelledby="fromButton">
-    </div>
-  </div>
-  <div class="dropdown">
-    <button class="dropbtn color-change" id="endButton" aria-haspopup="true" aria-expanded="false">To Station: </button>
-    <div class="dropdown-content" id="selectEnd" aria-labelledby="endButton">
-    </div>
-  </div>
-</div>
+  <main>
+    <div class="col-12 button-container">
+      <div class="button-bar col-4">
+        <h2><span class="step">Step 1:</span>
+        Line and Station</h2>
+        <div class="dropdown col-12">
+          <button class="dropbtn block" id="directionButton" aria-haspopup="true" aria-expanded="false">Direction: </button>
+          <div class="dropdown-content" id="selectDirection" aria-labelledby="directionButton">
+            <a href="#" onclick="addStartStops('alewifetoashmont')">Red (Ashmont): Alewife to Ashmont</a>
+            <a href="#" onclick="addStartStops('ashmonttoalewife')">Red (Ashmont): Ashmont to Alewife</a>
+            <a href="#" onclick="addStartStops('alewifetobraintree')">Red (Braintree): Alewife to Braintree</a>
+            <a href="#" onclick="addStartStops('braintreetoalewife')">Red (Braintree): Braintree to Alewife </a>
+            <a href="#" onclick="addStartStops('oakgrovetoforesthills')">Orange: Oak Grove to Forest Hills</a>
+            <a href="#" onclick="addStartStops('foresthillstooakgrove')">Orange: Forest Hills to Oak Grove</a>
+            <a href="#" onclick="addStartStops('bowdointowonderland')">Blue: Bowdoin to Wonderland</a>
+            <a href="#" onclick="addStartStops('wonderlandtobowdoin')">Blue: Wonderland to Bowdoin</a>
+            <a href="#" onclick="addStartStops('bostoncollegetoparkst')">Green B: Boston College to Park St</a>
+            <a href="#" onclick="addStartStops('parksttobostoncollege')">Green B: Park St to Boston College</a>
+            <a href="#" onclick="addStartStops('clevelandcircletonorthstation')">Green C: Cleveland Circle to North Station</a>
+            <a href="#" onclick="addStartStops('northstationtoclevelandcircle')">Green C: North Station to Cleveland Circle</a>
+            <a href="#" onclick="addStartStops('riversidetogovernmentcenter')">Green D: Riverside to Government Center</a>
+            <a href="#" onclick="addStartStops('governmentcentertoriverside')">Green D: Government Center to Riverside</a>
+            <a href="#" onclick="addStartStops('heathsttolechemere')">Green E: Heath St to Lechemere</a>
+            <a href="#" onclick="addStartStops('lechemeretoheathst')">Green E: Lechemere to Heath St</a>
+          </div>
+        </div>
+        <div class="dropdown col-12">
+          <button class="dropbtn block" id="fromButton" aria-haspopup="true" aria-expanded="false">From Station: </button>
+          <div class="dropdown-content" id="selectStart" aria-labelledby="fromButton">
+          </div>
+        </div>
+        <div class="dropdown col-12">
+          <button class="dropbtn block" id="endButton" aria-haspopup="true" aria-expanded="false">To Station: </button>
+          <div class="dropdown-content" id="selectEnd" aria-labelledby="endButton">
+          </div>
+        </div>
+      </div>
 
-<div class="col-3">
-  <div class="dropdown">
-    <button class="dropbtn color-change" id="startTimeYear" aria-haspopup="true" aria-expanded="false">Year: </button>
-    <div class="dropdown-content" id="selectStartYear" aria-labelledby="startTimeYear">
-      <a href="#" onclick="addFromYear('2015')">2015</a>
-      <a href="#" onclick="addFromYear('2016')">2016</a>
-      <a href="#" onclick="addFromYear('2017')">2017</a>
-      <a href="#" onclick="addFromYear('2018')">2018</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <button class="dropbtn color-change" id="startTimeMonth" aria-haspopup="true" aria-expanded="false">Month: </button>
-    <div class="dropdown-content" id="selectStartMonth" aria-labelledby="startTimeMonth">
-    </div>
-  </div>
-  <div class="dropdown">
-    <button class="dropbtn color-change" id="startTimeDay" aria-haspopup="true" aria-expanded="false">Day: </button>
-    <div class="dropdown-content" id="selectStartDay" aria-labelledby="startTimeDay">
-    </div>
-  </div>
-</div>
-
-
-<div class="button-bar col-3">
-  <div class="dropdown">
-    <button class="dropbtn color-change" id="dayType" aria-haspopup="true" aria-expanded="false">Day Type: </button>
-    <div class="dropdown-content" id="selectDayType" aria-labelledby="dayType">
-      <a href="#" onclick="addDayType('week')">Weekday</a>
-      <a href="#" onclick="addDayType('sat')">Saturday</a>
-      <a href="#" onclick="addDayType('sun')">Sunday</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <button class="dropbtn color-change" id="daySeg" aria-haspopup="true" aria-expanded="false">Segement: </button>
-    <div class="dropdown-content" id="selectDaySeg" aria-labelledby="daySeg">
-    </div>
-  </div>
-</div>
-
-<button class="dropbtn submit" onclick="ajaxCall()">See Times</button>
+      <div class="button-bar col-4">
+        <h2><span class="step">Step 2:</span> Week</h2>
+        <div class="dropdown col-12">
+          <button class="dropbtn block" id="startTimeYear" aria-haspopup="true" aria-expanded="false">Year: </button>
+          <div class="dropdown-content" id="selectStartYear" aria-labelledby="startTimeYear">
+            <a href="#" onclick="addFromYear('2015')">2015</a>
+            <a href="#" onclick="addFromYear('2016')">2016</a>
+            <a href="#" onclick="addFromYear('2017')">2017</a>
+            <a href="#" onclick="addFromYear('2018')">2018</a>
+          </div>
+        </div>
+        <div class="dropdown col-12">
+          <button class="dropbtn block" id="startTimeMonth" aria-haspopup="true" aria-expanded="false">Month: </button>
+          <div class="dropdown-content" id="selectStartMonth" aria-labelledby="startTimeMonth">
+          </div>
+        </div>
+        <div class="dropdown col-12">
+          <button class="dropbtn block" id="startTimeDay" aria-haspopup="true" aria-expanded="false">Day: </button>
+          <div class="dropdown-content" id="selectStartDay" aria-labelledby="startTimeDay">
+          </div>
+        </div>
+      </div>
 
 
-<div id="svgContainer">
-  <div id="histogram" class="col-8"></div>
-  <div id="legend" class="col-4"></div>
-</div>
-<div id="dataTableContainer">
-  <button class="dropbtn" id="dataTableButton" onclick="displayDataTable()">
+      <div class="button-bar col-4">
+        <h2><span class="step">Step 3:</span> Time Segement</h2>
+        <div class="dropdown col-12">
+          <button class="dropbtn block" id="dayType" aria-haspopup="true" aria-expanded="false">Day Type: </button>
+          <div class="dropdown-content" id="selectDayType" aria-labelledby="dayType">
+            <a href="#" onclick="addDayType('week')">Weekday</a>
+            <a href="#" onclick="addDayType('sat')">Saturday</a>
+            <a href="#" onclick="addDayType('sun')">Sunday</a>
+          </div>
+        </div>
+        <div class="dropdown col-12">
+          <button class="dropbtn block" id="daySeg" aria-haspopup="true" aria-expanded="false">Segement: </button>
+          <div class="dropdown-content" id="selectDaySeg" aria-labelledby="daySeg">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <button class="submit col-12" onclick="ajaxCall()">
+  See Times
+</button>
+
+
+    <div id="svgContainer">
+      <div id="histogram" class="col-8"></div>
+      <div id="legend" class="col-4"></div>
+    </div>
+    <div id="dataTableContainer">
+      <button class="dropbtn" id="dataTableButton" onclick="displayDataTable()">
     View data table
   </button>
-</div>
-</main>
+    </div>
+  </main>
 
-<footer class="bottom-bar">
-  <h4> Made with <i class = "fas fa-heart" style="color:#ffbaad"></i> by OPMI </h4>
-  <p style="color:white">Processed with <i class="fas fa-coffee"></i> by interns </p>
-</footer>
+  <footer class="bottom-bar">
+    <h4> Made with <i class = "fas fa-heart" style="color:#ffbaad"></i> by OPMI </h4>
+    <p style="color:white">Processed with <i class="fas fa-coffee"></i> by interns </p>
+  </footer>
 
 </body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="stops.js"></script>
 <script src="query-api.js"></script>
 <script src="viz.js"></script>
+
 </html>
