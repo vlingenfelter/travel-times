@@ -1,4 +1,4 @@
-var url = "http://realtime.mbta.com/developer/api/v2.1/traveltimes?";
+var url = "https://realtime.mbta.com/developer/api/v2.1/traveltimes?";
 var key = "api_key=wX9NwuHnZU2ToO7GmGR9uw";
 var format = "&format=json";
 var fromStop = "&from_stop=70172";
@@ -72,7 +72,7 @@ function ajaxCall() {
               var time = parseFloat(data.travel_times[j].travel_time_sec);
               times.push((time / 60));
             }
-          //  $("#api-test").append(benchmark + ", ");
+            //  $("#api-test").append(benchmark + ", ");
           }
         }
       });
@@ -424,7 +424,7 @@ function addDaySegs(segement) {
         toTime = "&to_datetime=";
         var fromD = new Date(fromYear, fromMonth, day, 5);
         fromEpoch = fromD.getTime() / 1000;
-        var toD = new Date(fromYear, fromMonth, (day+1), 2, 59);
+        var toD = new Date(fromYear, fromMonth, (day + 1), 2, 59);
         toEpoch = toD.getTime() / 1000;
         fromTime += fromEpoch;
         toTime += toEpoch;
@@ -478,7 +478,7 @@ function addDaySegs(segement) {
         toTime = "&to_datetime=";
         var fromD = new Date(fromYear, fromMonth, day, 18, 30);
         fromEpoch = fromD.getTime() / 1000;
-        var toD = new Date(fromYear, fromMonth, (day+1), 6, 59);
+        var toD = new Date(fromYear, fromMonth, (day + 1), 6, 59);
         toEpoch = toD.getTime() / 1000;
         fromTime += fromEpoch;
         toTime += toEpoch;
